@@ -143,7 +143,7 @@
 
 <!-- AUXILIARY VOUCHER DOCUMENT -->
 <class-descriptor class="org.kuali.kfs.fp.document.AuxiliaryVoucherDocument" table="FP_ACRL_VCHR_DOC_T">
-    <!--  common transactional document base attributes -->
+<!--      common transactional document base attributes -->
     <field-descriptor name="documentNumber" column="FDOC_NBR" jdbc-type="VARCHAR" primarykey="true" />
     <field-descriptor name="versionNumber" column="VER_NBR" jdbc-type="BIGINT" locking="true" />
     <field-descriptor name="objectId" column="OBJ_ID" jdbc-type="VARCHAR" index="true" />
@@ -151,17 +151,17 @@
     <field-descriptor name="nextSourceLineNumber" column="FDOC_NXT_LINE_NBR" jdbc-type="INTEGER" />
     <field-descriptor name="postingPeriodCode" column="FDOC_POST_PRD_CD" jdbc-type="VARCHAR" />
 
-    <!--  attributes specific to AV doc -->
+<!--      attributes specific to AV doc -->
     <field-descriptor name="reversalDate" column="FDOC_REVERSAL_DT" jdbc-type="DATE" />
     <field-descriptor name="typeCode" column="FDOC_AV_TYP_CD" jdbc-type="VARCHAR" />
 
-    <!--  object references -->
+<!--      object references -->
     <reference-descriptor name="documentHeader" class-ref="org.kuali.kfs.sys.businessobject.FinancialSystemDocumentHeader" auto-retrieve="true" auto-update="object" auto-delete="object" proxy="true" >
         <foreignkey field-ref="documentNumber" />
     </reference-descriptor>
 
-    <!--  collections -->
-    <!--  common collections -->
+<!--      collections -->
+<!--      common collections -->
     <collection-descriptor name="sourceAccountingLines" proxy="true" element-class-ref="org.kuali.kfs.sys.businessobject.SourceAccountingLine" collection-class="org.apache.ojb.broker.util.collections.ManageableArrayList" auto-retrieve="true" auto-update="object" auto-delete="object">
         <orderby name="sequenceNumber" sort="ASC" />
         <inverse-foreignkey field-ref="documentNumber" />
@@ -1555,29 +1555,52 @@
     <field-descriptor name="transactionMerchantCategoryCode" column="TRN_MCC_CD" jdbc-type="VARCHAR" />
 </class-descriptor>
 
-<class-descriptor class="org.kuali.kfs.fp.businessobject.ProcurementCardHolder" table="FP_PRCRMNT_CARD_HLDR_T">
-    <field-descriptor name="documentNumber" column="FDOC_NBR" jdbc-type="VARCHAR" primarykey="true" index="true" />
-    <field-descriptor name="objectId" column="OBJ_ID" jdbc-type="VARCHAR" index="true" />
-    <field-descriptor name="versionNumber" column="VER_NBR" jdbc-type="BIGINT" locking="true" />
-    <field-descriptor name="transactionCreditCardNumber" column="TRN_CC_NBR" jdbc-type="VARCHAR" conversion="org.kuali.rice.core.framework.persistence.ojb.conversion.OjbKualiEncryptDecryptFieldConversion"/>
-    <field-descriptor name="cardHolderName" column="FDOC_CARD_HLDR_NM" jdbc-type="VARCHAR" />
-    <field-descriptor name="cardHolderAlternateName" column="FDOC_CARD_HLDR_ALTRNT_NM" jdbc-type="VARCHAR" />
-    <field-descriptor name="cardHolderLine1Address" column="FDOC_CARD_HLDR_LN1_ADDR" jdbc-type="VARCHAR" />
-    <field-descriptor name="cardHolderLine2Address" column="FDOC_CARD_HLDR_LN2_ADDR" jdbc-type="VARCHAR" />
-    <field-descriptor name="cardHolderCityName" column="FDOC_CARD_HLDR_CTY_NM" jdbc-type="VARCHAR" />
-    <field-descriptor name="cardHolderStateCode" column="FDOC_CARD_HLDR_ST_CD" jdbc-type="VARCHAR" />
-    <field-descriptor name="cardHolderZipCode" column="FDOC_CARD_HLDR_ZIP_CD" jdbc-type="VARCHAR" />
-    <field-descriptor name="cardHolderWorkPhoneNumber" column="FDOC_CARD_HLDR_WRK_PHN_NBR" jdbc-type="VARCHAR" />
-    <field-descriptor name="cardLimit" column="FDOC_CARD_LMT" jdbc-type="DECIMAL" conversion="org.kuali.rice.core.framework.persistence.ojb.conversion.OjbKualiDecimalFieldConversion" />
-    <field-descriptor name="cardCycleAmountLimit" column="FDOC_CARD_CYCLE_AMT_LMT" jdbc-type="DECIMAL" conversion="org.kuali.rice.core.framework.persistence.ojb.conversion.OjbKualiDecimalFieldConversion" />
-    <field-descriptor name="cardCycleVolumeLimit" column="FDOC_CARD_CYCLE_VOL_LMT" jdbc-type="DECIMAL" conversion="org.kuali.rice.core.framework.persistence.ojb.conversion.OjbKualiDecimalFieldConversion" />
-    <field-descriptor name="cardStatusCode" column="FDOC_CARD_STAT_CD" jdbc-type="VARCHAR" />
-    <field-descriptor name="cardNoteText" column="FDOC_CARD_NTE_TXT" jdbc-type="VARCHAR" />
-    <field-descriptor name="chartOfAccountsCode" column="FIN_COA_CD" jdbc-type="VARCHAR" />
-    <field-descriptor name="accountNumber" column="ACCOUNT_NBR" jdbc-type="VARCHAR" />
-    <field-descriptor name="subAccountNumber" column="SUB_ACCT_NBR" jdbc-type="VARCHAR" />
-    <!-- the chart, account, and subaccount fields in this table are potientally invalid and when references are setup and not found OJB seems to be settting the primitive field to blank-->
-</class-descriptor>
+<!-- <class-descriptor class="org.kuali.kfs.fp.businessobject.ProcurementCardHolder" table="FP_PRCRMNT_CARD_HLDR_T"> -->
+<!--     <field-descriptor name="documentNumber" column="FDOC_NBR" jdbc-type="VARCHAR" primarykey="true" index="true" /> -->
+<!--     <field-descriptor name="objectId" column="OBJ_ID" jdbc-type="VARCHAR" index="true" /> -->
+<!--     <field-descriptor name="versionNumber" column="VER_NBR" jdbc-type="BIGINT" locking="true" /> -->
+<!--     <field-descriptor name="transactionCreditCardNumber" column="TRN_CC_NBR" jdbc-type="VARCHAR" conversion="org.kuali.rice.core.framework.persistence.ojb.conversion.OjbKualiEncryptDecryptFieldConversion"/> -->
+<!--     <field-descriptor name="cardHolderName" column="FDOC_CARD_HLDR_NM" jdbc-type="VARCHAR" /> -->
+<!--     <field-descriptor name="cardHolderAlternateName" column="FDOC_CARD_HLDR_ALTRNT_NM" jdbc-type="VARCHAR" /> -->
+<!--     <field-descriptor name="cardHolderLine1Address" column="FDOC_CARD_HLDR_LN1_ADDR" jdbc-type="VARCHAR" /> -->
+<!--     <field-descriptor name="cardHolderLine2Address" column="FDOC_CARD_HLDR_LN2_ADDR" jdbc-type="VARCHAR" /> -->
+<!--     <field-descriptor name="cardHolderCityName" column="FDOC_CARD_HLDR_CTY_NM" jdbc-type="VARCHAR" /> -->
+<!--     <field-descriptor name="cardHolderStateCode" column="FDOC_CARD_HLDR_ST_CD" jdbc-type="VARCHAR" /> -->
+<!--     <field-descriptor name="cardHolderZipCode" column="FDOC_CARD_HLDR_ZIP_CD" jdbc-type="VARCHAR" /> -->
+<!--     <field-descriptor name="cardHolderWorkPhoneNumber" column="FDOC_CARD_HLDR_WRK_PHN_NBR" jdbc-type="VARCHAR" /> -->
+<!--     <field-descriptor name="cardLimit" column="FDOC_CARD_LMT" jdbc-type="DECIMAL" conversion="org.kuali.rice.core.framework.persistence.ojb.conversion.OjbKualiDecimalFieldConversion" /> -->
+<!--     <field-descriptor name="cardCycleAmountLimit" column="FDOC_CARD_CYCLE_AMT_LMT" jdbc-type="DECIMAL" conversion="org.kuali.rice.core.framework.persistence.ojb.conversion.OjbKualiDecimalFieldConversion" /> -->
+<!--     <field-descriptor name="cardCycleVolumeLimit" column="FDOC_CARD_CYCLE_VOL_LMT" jdbc-type="DECIMAL" conversion="org.kuali.rice.core.framework.persistence.ojb.conversion.OjbKualiDecimalFieldConversion" /> -->
+<!--     <field-descriptor name="cardStatusCode" column="FDOC_CARD_STAT_CD" jdbc-type="VARCHAR" /> -->
+<!--     <field-descriptor name="cardNoteText" column="FDOC_CARD_NTE_TXT" jdbc-type="VARCHAR" /> -->
+<!--     <field-descriptor name="chartOfAccountsCode" column="FIN_COA_CD" jdbc-type="VARCHAR" /> -->
+<!--     <field-descriptor name="accountNumber" column="ACCOUNT_NBR" jdbc-type="VARCHAR" /> -->
+<!--     <field-descriptor name="subAccountNumber" column="SUB_ACCT_NBR" jdbc-type="VARCHAR" /> -->
+<!--     the chart, account, and subaccount fields in this table are potientally invalid and when references are setup and not found OJB seems to be settting the primitive field to blank -->
+<!-- </class-descriptor> -->
+	<class-descriptor class="org.kuali.kfs.fp.businessobject.ProcurementCardHolder" table="FP_PRCRMNT_CARD_HLDR_T">
+	    <field-descriptor name="documentNumber" column="FDOC_NBR" jdbc-type="VARCHAR" primarykey="true" index="true" />
+	    <field-descriptor name="objectId" column="OBJ_ID" jdbc-type="VARCHAR" index="true" />
+	    <field-descriptor name="versionNumber" column="VER_NBR" jdbc-type="BIGINT" locking="true" />
+	    <field-descriptor name="transactionCreditCardNumber" column="TRN_CC_NBR" jdbc-type="VARCHAR"/>
+	    <field-descriptor name="cardHolderName" column="FDOC_CARD_HLDR_NM" jdbc-type="VARCHAR" />
+	    <field-descriptor name="cardHolderAlternateName" column="FDOC_CARD_HLDR_ALTRNT_NM" jdbc-type="VARCHAR" />
+	    <field-descriptor name="cardHolderLine1Address" column="FDOC_CARD_HLDR_LN1_ADDR" jdbc-type="VARCHAR" />
+	    <field-descriptor name="cardHolderLine2Address" column="FDOC_CARD_HLDR_LN2_ADDR" jdbc-type="VARCHAR" />
+	    <field-descriptor name="cardHolderCityName" column="FDOC_CARD_HLDR_CTY_NM" jdbc-type="VARCHAR" />
+	    <field-descriptor name="cardHolderStateCode" column="FDOC_CARD_HLDR_ST_CD" jdbc-type="VARCHAR" />
+	    <field-descriptor name="cardHolderZipCode" column="FDOC_CARD_HLDR_ZIP_CD" jdbc-type="VARCHAR" />
+	    <field-descriptor name="cardHolderWorkPhoneNumber" column="FDOC_CARD_HLDR_WRK_PHN_NBR" jdbc-type="VARCHAR" />
+	    <field-descriptor name="cardLimit" column="FDOC_CARD_LMT" jdbc-type="DECIMAL" conversion="org.kuali.rice.core.framework.persistence.ojb.conversion.OjbKualiDecimalFieldConversion" />
+	    <field-descriptor name="cardCycleAmountLimit" column="FDOC_CARD_CYCLE_AMT_LMT" jdbc-type="DECIMAL" conversion="org.kuali.rice.core.framework.persistence.ojb.conversion.OjbKualiDecimalFieldConversion" />
+	    <field-descriptor name="cardCycleVolumeLimit" column="FDOC_CARD_CYCLE_VOL_LMT" jdbc-type="DECIMAL" conversion="org.kuali.rice.core.framework.persistence.ojb.conversion.OjbKualiDecimalFieldConversion" />
+	    <field-descriptor name="cardStatusCode" column="FDOC_CARD_STAT_CD" jdbc-type="VARCHAR" />
+	    <field-descriptor name="cardNoteText" column="FDOC_CARD_NTE_TXT" jdbc-type="VARCHAR" />
+	    <field-descriptor name="chartOfAccountsCode" column="FIN_COA_CD" jdbc-type="VARCHAR" />
+	    <field-descriptor name="accountNumber" column="ACCOUNT_NBR" jdbc-type="VARCHAR" />
+	    <field-descriptor name="subAccountNumber" column="SUB_ACCT_NBR" jdbc-type="VARCHAR" />
+	    <!-- the chart, account, and subaccount fields in this table are potientally invalid and when references are setup and not found OJB seems to be settting the primitive field to blank-->
+	</class-descriptor>
 
 <class-descriptor class="org.kuali.kfs.fp.businessobject.ProcurementCardTransactionDetail" table="FP_PRCRMNT_TRN_DTL_T">
     <field-descriptor name="documentNumber" column="FDOC_NBR" jdbc-type="VARCHAR" primarykey="true" index="true" />
@@ -2017,41 +2040,7 @@
     </collection-descriptor>
 </class-descriptor>
 
-<class-descriptor class="org.kuali.kfs.fp.document.BudgetAdjustmentDocument" table="FP_BDGT_ADJ_DOC_T">
-    <field-descriptor name="documentNumber" column="FDOC_NBR" jdbc-type="VARCHAR" primarykey="true" index="true" />
-    <field-descriptor name="versionNumber" column="VER_NBR" jdbc-type="BIGINT" locking="true" />
-    <field-descriptor name="objectId" column="OBJ_ID" jdbc-type="VARCHAR" index="true" />
-    <field-descriptor name="nextSourceLineNumber" column="FDOC_NXT_FRM_NBR" jdbc-type="INTEGER" />
-    <field-descriptor name="nextTargetLineNumber" column="FDOC_NXT_TO_NBR" jdbc-type="INTEGER" />
-    <field-descriptor name="nextPositionSourceLineNumber" column="FDOC_NXT_PSFRM_NBR" jdbc-type="INTEGER" />
-    <field-descriptor name="nextPositionTargetLineNumber" column="FDOC_NXT_PSTO_NBR" jdbc-type="INTEGER" />
-    <field-descriptor name="postingYear" column="FDOC_POST_YR" jdbc-type="INTEGER" />
-    <field-descriptor name="postingPeriodCode" column="FDOC_POST_PRD_CD" jdbc-type="VARCHAR" />
 
-    <reference-descriptor name="documentHeader" class-ref="org.kuali.kfs.sys.businessobject.FinancialSystemDocumentHeader" auto-retrieve="true" auto-update="object" auto-delete="object" proxy="true" >
-        <foreignkey field-ref="documentNumber" />
-    </reference-descriptor>
-    <collection-descriptor name="sourceAccountingLines" element-class-ref="org.kuali.kfs.fp.businessobject.BudgetAdjustmentSourceAccountingLine" collection-class="org.apache.ojb.broker.util.collections.ManageableArrayList" auto-retrieve="true" auto-update="object" auto-delete="object" proxy="true">
-        <orderby name="sequenceNumber" sort="ASC" />
-        <inverse-foreignkey field-ref="documentNumber" />
-				<query-customizer class="org.kuali.kfs.sys.dataaccess.impl.OjbQueryCustomizer">
-						<attribute attribute-name="financialDocumentLineTypeCode" attribute-value="F" />
-				</query-customizer>
-    </collection-descriptor>
-
-    <collection-descriptor name="targetAccountingLines" element-class-ref="org.kuali.kfs.fp.businessobject.BudgetAdjustmentTargetAccountingLine" collection-class="org.apache.ojb.broker.util.collections.ManageableArrayList" auto-retrieve="true" auto-update="object" auto-delete="object" proxy="true">
-        <orderby name="sequenceNumber" sort="ASC" />
-        <inverse-foreignkey field-ref="documentNumber" />
-				<query-customizer class="org.kuali.kfs.sys.dataaccess.impl.OjbQueryCustomizer">
-						<attribute attribute-name="financialDocumentLineTypeCode" attribute-value="T" />
-				</query-customizer>
-    </collection-descriptor>
-
-    <collection-descriptor name="generalLedgerPendingEntries" proxy="true" element-class-ref="org.kuali.kfs.sys.businessobject.GeneralLedgerPendingEntry" collection-class="org.apache.ojb.broker.util.collections.ManageableArrayList" auto-retrieve="true" auto-update="object" auto-delete="object">
-        <orderby name="transactionLedgerEntrySequenceNumber" sort="ASC" />
-        <inverse-foreignkey field-ref="documentNumber" />
-    </collection-descriptor>
-</class-descriptor>
 
 <class-descriptor class="org.kuali.kfs.fp.businessobject.FunctionControlCode" table="FP_FUNC_CTRL_CD_T">
     <field-descriptor name="financialSystemFunctionControlCode" column="FS_FUNC_CTRL_CD" jdbc-type="VARCHAR" primarykey="true" index="true" />
