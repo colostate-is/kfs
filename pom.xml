@@ -928,5 +928,20 @@
 
   </dependencies>
 
+	<distributionManagement>
+	
+		<snapshotRepository>
+    		<id>csu-snapshots</id>
+    		<name>csu-snapshots</name>
+    		<uniqueVersion>true</uniqueVersion> 
+    		<url>http://laplata.is.colostate.edu:8081/nexus/content/repositories/snapshots</url>
+  		</snapshotRepository>
+	 
+	 	<repository> 
+	 		<id>csu-releases</id> 
+	 		<url>http://laplata.is.colostate.edu:8081/nexus/content/repositories/releases</url> 
+	 	</repository> 
+	 
+	</distributionManagement>
 
 </project>
