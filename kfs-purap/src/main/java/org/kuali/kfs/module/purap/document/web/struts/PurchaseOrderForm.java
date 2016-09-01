@@ -77,6 +77,8 @@ public class PurchaseOrderForm extends PurchasingFormBase {
     protected PurchaseOrderVendorQuote newPurchaseOrderVendorQuote;
     protected Long awardedVendorNumber;
 
+    protected boolean purchaseOrderPrintRequested;
+
     // Retransmit.
     protected String[] retransmitItemsSelected = {};
     protected String retransmitTransmissionMethod;
@@ -200,6 +202,14 @@ public class PurchaseOrderForm extends PurchasingFormBase {
 
     public void setSensitiveDatasAssigned(List<SensitiveData> poSensitiveData) {
         this.sensitiveDatasAssigned = poSensitiveData;
+    }
+
+    public boolean isPurchaseOrderPrintRequested() {
+        return purchaseOrderPrintRequested;
+    }
+
+    public void setPurchaseOrderPrintRequested(boolean purchaseOrderPrintRequested) {
+        this.purchaseOrderPrintRequested = purchaseOrderPrintRequested;
     }
 
     @Override
@@ -714,6 +724,7 @@ public class PurchaseOrderForm extends PurchasingFormBase {
         printingPreviewButton.setExtraButtonProperty("methodToCall.printingPreviewPo");
         printingPreviewButton.setExtraButtonSource("${" + KFSConstants.EXTERNALIZABLE_IMAGES_URL_KEY + "}buttonsmall_previewpf.gif");
         printingPreviewButton.setExtraButtonAltText("PrintingPreview");
+        printingPreviewButton.setExtraButtonOnclick("excludeSubmitRestriction=true");
 
         // Print button
         ExtraButton printButton = new ExtraButton();

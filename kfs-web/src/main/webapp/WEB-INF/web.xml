@@ -201,6 +201,8 @@
     <servlet-name>edoclite</servlet-name>
   </filter-mapping>
 
+    <!-- Listeners -->
+
   <listener>
     <listener-class>org.kuali.rice.krad.web.session.NonSerializableSessionListener</listener-class>
   </listener>
@@ -447,6 +449,10 @@
     <taglib>
       <taglib-uri>http://www.kuali.org/struts.apache.org/tags-html-el</taglib-uri>
       <taglib-location>/WEB-INF/tld/kuali-struts-html-el.tld</taglib-location>
+    </taglib>
+    <taglib>
+        <taglib-uri>http://www.owasp/index.php/Category:OWASP_Enterprise_Security_API</taglib-uri>
+        <taglib-uri>/WEB-INF/tlds/esapi.tld</taglib-uri>
     </taglib>
   </jsp-config>
 	<security-constraint>
